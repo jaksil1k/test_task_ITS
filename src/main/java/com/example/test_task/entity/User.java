@@ -2,6 +2,8 @@ package com.example.test_task.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -11,7 +13,7 @@ public class User {
     @Column(name = "id")
     private Long Id;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "name")
@@ -20,7 +22,31 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @ManyToMany
+    @JoinTable(
+            name = "users_locations",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "location_id")
+    )
+    private List<Location> locations;
+
+    @ManyToMany
+    @JoinTable(
+            name = "friends",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "friend_id")
+    )
+    private List<User> friends;
+
     public User() {
+    }
+
+    public User(Long id, String email, String name, String password, List<Location> locations) {
+        Id = id;
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.locations = locations;
     }
 
     public Long getId() {
@@ -53,5 +79,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
     }
 }
