@@ -1,5 +1,6 @@
 package com.example.test_task.repositry;
 
+import com.example.test_task.entity.Location;
 import com.example.test_task.entity.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -16,4 +17,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
     boolean existsUserByEmail(String email);
 
     Optional<User> findByEmail(String email);
+
+
 }

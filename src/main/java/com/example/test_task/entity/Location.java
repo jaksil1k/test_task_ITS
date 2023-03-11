@@ -74,6 +74,7 @@ public class Location {
         this.locationShares = locationShares;
     }
 
+
     @Override
     public String toString() {
         return "Location{" +

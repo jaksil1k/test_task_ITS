@@ -4,12 +4,12 @@ import com.example.test_task.entity.Location;
 import com.example.test_task.entity.User;
 import com.example.test_task.repositry.LocationRepository;
 import com.example.test_task.repositry.LocationShareRepository;
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,6 +32,10 @@ public class LocationService {
 
         currentUser.addLocationToUser(location);
         return location;
+    }
+
+    public List<Location> getAllLocationsByUserEmail(String email) {
+        return locationRepository.getAllLocationsByUserEmail(email);
     }
 
     public Optional<Location> getById(Long id) {

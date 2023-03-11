@@ -1,5 +1,6 @@
 package com.example.test_task.service;
 
+import com.example.test_task.entity.Location;
 import com.example.test_task.entity.User;
 import com.example.test_task.entity.UserWithError;
 import com.example.test_task.repositry.UserRepository;
@@ -57,4 +58,6 @@ public class UserService implements UserDetailsService {
     public Optional<User> getByEmail(String email) {
         return repository.findByEmail(email);
     }
+
+
 }
