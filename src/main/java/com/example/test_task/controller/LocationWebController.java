@@ -66,4 +66,15 @@ public class LocationWebController {
         locationShareService.create(locationShare);
         return "redirect:/locations/" + locationShareDto.getLocation().getId();
     }
+
+
+    @GetMapping("/all-users/{id}")
+    public String getUserById(@PathVariable Long id, Model model) {
+        Optional<Location> optionalLocations = locationService.getById(id);
+        if (optionalLocations.isEmpty()) {
+            return "location-not-found";
+        }
+        model.addAttribute("users", optionalLocations.get().getUsers());
+        return "show-users-on-location";
+    }
 }
