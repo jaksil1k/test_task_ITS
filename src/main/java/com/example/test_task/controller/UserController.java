@@ -4,6 +4,7 @@ import com.example.test_task.entity.User;
 import com.example.test_task.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody User user) throws Exception {
         return userService.create(user);
     }
     @GetMapping

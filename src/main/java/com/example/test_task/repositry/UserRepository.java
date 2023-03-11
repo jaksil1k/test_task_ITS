@@ -6,9 +6,14 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
     @Query(value = "select id, name, email, password from friends f join users u on f.friend_id=u.id where f.user_id = ?1", nativeQuery = true)
     List<User> getAllFriendsByUserId(Long user_id);
+
+    boolean existsUserByEmail(String email);
+
+    Optional<User> findByEmail(String email);
 }
