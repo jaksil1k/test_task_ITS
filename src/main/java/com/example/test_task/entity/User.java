@@ -27,7 +27,6 @@ public class User implements UserDetails {
     @JoinColumn(name = "user_email")
     private List<LocationShare> locationShares;
 
-
     @ManyToMany
     @JoinTable(
             name = "friends",
@@ -35,6 +34,10 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "friend_email")
     )
     private List<User> friends;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "shared_user_email")
+    private List<LocationShare> locationShared;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(

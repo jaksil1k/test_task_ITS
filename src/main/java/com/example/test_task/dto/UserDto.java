@@ -1,6 +1,6 @@
 package com.example.test_task.dto;
 
-public class UserShowDto {
+public class UserDto {
     private String name;
     private String email;
 

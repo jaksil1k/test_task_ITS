@@ -37,7 +37,7 @@ public class LocationWebController {
         return "create-location";
     }
     @PostMapping("/create")
-    public String createLocationPost(@ModelAttribute Location location, Model model) {
+    public String createLocationPost(@ModelAttribute Location location, Model model) throws Exception {
         location = locationService.create(location);
         return "redirect:/locations/" + location.getId();
     }
@@ -48,7 +48,7 @@ public class LocationWebController {
             return "location-not-found";
         }
         model.addAttribute("location", optionalLocation.get());
-        model.addAttribute("locationShareDto", new LocationShareDto(optionalLocation.get()));
+        model.addAttribute("locationShareDto", new LocationShareDto(optionalLocation.get().getId()));
         return "show-location";
     }
 
@@ -61,10 +61,10 @@ public class LocationWebController {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
 //        System.out.println(currentUser);
-        LocationShare locationShare = new LocationShare(user.get(), locationShareDto.getLocation(), currentUser, locationShareDto.getCouldShare());
-        System.out.println(locationShare.getSharedUser());
+        LocationShare locationShare = new LocationShare(user.get(),
+                locationService.getById(locationShareDto.getLocationId()).get(), currentUser, locationShareDto.getCouldShare());
         locationShareService.create(locationShare);
-        return "redirect:/locations/" + locationShareDto.getLocation().getId();
+        return "redirect:/locations/" + locationShareDto.getLocationId();
     }
 
 

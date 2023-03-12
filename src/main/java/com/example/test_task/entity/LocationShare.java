@@ -24,7 +24,8 @@ public class LocationShare {
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "shared_user_email")
     private User sharedUser;
 
     @Column(name = "could_share")
@@ -39,6 +40,8 @@ public class LocationShare {
         this.sharedUser = sharedUser;
         this.couldShare = couldShare;
     }
+
+
 
     public User getUser() {
         return user;

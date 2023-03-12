@@ -34,6 +34,11 @@ public class Location {
         this.address = address;
     }
 
+    public Location(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
     public Long getId() {
         return Id;
     }

@@ -15,7 +15,7 @@
 <a href="/locations/create">create another location</a>
 <form action="#" th:action="@{/locations/share}" th:object="${locationShareDto}" method="post">
     <h3>Share with:</h3>
-    <input type="hidden" th:field="*{location}">
+    <input type="hidden" th:field="*{locationId}">
     <label th:text="Email"/><br>
     <input type="text" th:field="*{email}"/>
     <p> Access level:</p>
